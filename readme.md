@@ -1,6 +1,6 @@
 # Apollo Reactive Store
 
-> An simple api for manage and update apollo reactive vars.
+> A simple api for manage and update apollo reactive vars.
 
 ## Why?
 
@@ -9,7 +9,6 @@ Global state management is alway a problem, reactive store provide an option to 
 ## Usage
 
 ```js
-
 import { gql, ApolloClient, useQuery } from "@apollo/client"
 import create from "apollo-reactive-store";
 
@@ -23,7 +22,7 @@ const store = create({
 
 // initialize in apollo client
 const client = new ApolloClient({
-  uri: "http://localhost:3000/",
+  uri: "API_URL",
   cache: new InMemoryCache({
     typePolicies: store.getTypePolicies()
   })
@@ -35,7 +34,7 @@ function App() {
     query {
       counter
     }
-  `, { client: client });
+  `, { client });
 
   if (loading || error) { return null }
 
@@ -50,8 +49,7 @@ function App() {
   );
 }
 
-// use actions to mutate state and isolate logics
-
+// pass function to mutate state
 const actions = {
   toggle: (open) => {
     return (uiState) => ({ ...uiState, open })
@@ -63,7 +61,7 @@ function Modal() {
     query {
       uiState { open }
     }
-  `, { client: client });
+  `, { client });
 
   if (loading || error) { return null }
 
@@ -77,5 +75,4 @@ function Modal() {
     </div>
   );
 }
-
 ```
