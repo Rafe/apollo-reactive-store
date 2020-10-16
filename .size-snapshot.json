@@ -1,8 +1,8 @@
 {
   "index.js": {
-    "bundled": 1694,
-    "minified": 803,
-    "gzipped": 467,
+    "bundled": 1915,
+    "minified": 925,
+    "gzipped": 501,
     "treeshaked": {
       "rollup": {
         "code": 23,
@@ -14,9 +14,9 @@
     }
   },
   "index.cjs.js": {
-    "bundled": 1912,
-    "minified": 1013,
-    "gzipped": 513
+    "bundled": 2146,
+    "minified": 1135,
+    "gzipped": 543
   },
   "create.js": {
     "bundled": 1485,
@@ -33,9 +33,9 @@
     }
   },
   "apollo-reactive-store.js": {
-    "bundled": 1694,
-    "minified": 803,
-    "gzipped": 467,
+    "bundled": 1915,
+    "minified": 925,
+    "gzipped": 501,
     "treeshaked": {
       "rollup": {
         "code": 23,

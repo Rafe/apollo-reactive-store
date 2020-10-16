@@ -1,4 +1,4 @@
-import { makeVar, ReactiveVar } from '@apollo/client'
+import { makeVar, ReactiveVar, useReactiveVar } from '@apollo/client'
 
 type State<T> = Record<string | symbol, T>
 type Store<T> = Record<string | symbol, ReactiveVar<T>>
@@ -18,6 +18,7 @@ type Updater<Value> = (state: Value) => Value | Value
 export interface StoreApi<Value> {
   get<T>(key: string | symbol): Value
   update<StateSlice>(key: string | symbol, value: Updater<Value>): Value
+  useStore<T>(key: string | symbol): Value
   getTypePolicies(): TypePolicies
 }
 
@@ -62,6 +63,15 @@ export default function create<Value>(
       } else {
         return reactiveVar(value)
       }
+    },
+    useStore(key: string) {
+      const reactiveVar = store[key];
+
+      if (!reactiveVar) {
+        throw new Error(`useStore: key "${key} is invalid`);
+      }
+
+      return useReactiveVar(reactiveVar)
     },
     getTypePolicies() {
       return {

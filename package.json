@@ -1,6 +1,6 @@
 {
   "name": "apollo-reactive-store",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "reactive var api for apollo client",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
