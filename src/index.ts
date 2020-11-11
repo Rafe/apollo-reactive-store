@@ -20,18 +20,22 @@ export interface StoreApi<Value> {
   update<StateSlice>(key: string | symbol, value: Updater<Value>): Value
   useStore<T>(key: string | symbol): Value
   getTypePolicies(): TypePolicies
+  reset(): void
 }
 
 export default function create<Value>(
   initialState: State<Value>,
   options = { debug: false }
 ): StoreApi<Value> {
-  const store = Object.keys(initialState).reduce<Store<Value>>((sum, key) => {
-    return {
-      ...sum,
-      [key]: makeVar<Value>(initialState[key]),
-    }
-  }, {})
+  const createStore = () => {
+    return Object.keys(initialState).reduce<Store<Value>>((sum, key) => {
+      return {
+        ...sum,
+        [key]: makeVar<Value>(initialState[key]),
+      }
+    }, {})
+  }
+  let store = createStore()
 
   const debug = (key: string, value: Updater<Value>): void => {
     if (options.debug) {
@@ -88,6 +92,9 @@ export default function create<Value>(
           }, {}),
         },
       }
+    },
+    reset: () => {
+      store = createStore()
     },
   }
 }
